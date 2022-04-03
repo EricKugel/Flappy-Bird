@@ -11,7 +11,6 @@ var pipes;
 var bird;
 
 window.onload = function() {
-    window.scroll(0, 0);
     canvas = document.getElementById("canvas");
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -28,6 +27,7 @@ window.onload = function() {
     });
 
     document.getElementById("playagain").onclick = playAgain;
+    window.scroll(0, 0);
 
     loadImages();
 }
@@ -53,7 +53,7 @@ function loadImages() {
 
 var gameOver = false;
 function gameLoop() {
-    time += speed;
+    time += 1000 / speed;
     
     ctx.drawImage(cache.sky, 0, 0, window.innerWidth, window.innerHeight);
     bird.draw(time);
