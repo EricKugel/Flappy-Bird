@@ -38,11 +38,11 @@ class Bird {
         this.flapsPerSecond = 3;
         this.gravityStrength = 1;
 
-        this.dy = -20;
+        this.dy = -17;
     }
 
     flap(time) {
-        this.dy = -20;
+        this.dy = -17;
     }
 
     draw(time) {

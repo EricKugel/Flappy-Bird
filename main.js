@@ -3,6 +3,7 @@ var ctx;
 var cache;
 var time = 0;
 var score = 0;
+var speed = 36;
 
 const resources = ["sky.jpg", "bird.png"];
 
@@ -12,7 +13,6 @@ var bird;
 var firstFrame = true;
 
 window.onload = function() {
-    window.scroll(0, 0);
     canvas = document.getElementById("canvas");
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -30,6 +30,7 @@ window.onload = function() {
 
     document.getElementById("playagain").onclick = playAgain;
     document.getElementById("introBegin").onclick = beginGame;
+    window.scroll(0, 0);
 
     loadImages();
 }
@@ -56,7 +57,7 @@ function loadImages() {
 
 var gameOver = false;
 function gameLoop() {
-    time += 36;
+    time += 1000 / speed;
 
     ctx.drawImage(cache.sky, 0, 0, window.innerWidth, window.innerHeight);
     bird.draw(time);
@@ -64,8 +65,6 @@ function gameLoop() {
 
     if (birdRect[1] > window.innerHeight) {
         endGame();
-    } else if (birdRect[1] < 0) {
-        bird.y = 0;
     }
 
     for (var i = 0; i < pipes.length; i++) {
@@ -74,6 +73,7 @@ function gameLoop() {
             pipes.splice(i, 1);
             pipes.push(new Pipe());
             score += 1;
+            speed += 1;
             i--;
         }
         pipe.update();
@@ -87,11 +87,6 @@ function gameLoop() {
     ctx.fillStyle = "black";
     ctx.fillText(score, window.innerWidth - 100, 100);
 
-    ctx.beginPath();
-    ctx.rect(birdRect[0], birdRect[1], birdRect[2] - birdRect[0], birdRect[3] - birdRect[1]);
-    ctx.strokeStyle = "red";
-    ctx.stroke();
-
     // If first frame, display Intro window
     if (firstFrame) {
         introScreen();
@@ -102,9 +97,7 @@ function gameLoop() {
     if (!gameOver) {
         window.setTimeout(function() {
             gameLoop();
-        }, 1000 / 36);
-    } else {
-
+        }, 1000 / speed);
     }
 }
 
