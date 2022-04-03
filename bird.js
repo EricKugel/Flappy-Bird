@@ -1,5 +1,33 @@
 // A simple Bird class
 
+// The center of each bird frame
+const FRAME_POSITIONS = [
+    {
+        'x': 614,
+        'y': 294
+    },
+    {
+        'x': 1670,
+        'y': 300
+    },
+    {
+        'x': 2696,
+        'y': 312
+    },
+    {
+        'x': 578,
+        'y': 1270
+    },
+    {
+        'x': 1700,
+        'y': 1284
+    },
+    {
+        'x': 2706,
+        'y': 1240
+    },
+]
+
 class Bird {
     constructor(bitmap, x, y, ctx) {
         this.bitmap = bitmap;
@@ -28,8 +56,8 @@ class Bird {
         const frame = Math.floor(((time * this.flapsPerSecond) % 1000) / 167);
 
         // Determine top-left corner of bird.jpg containing animation frame.
-        let clipx = (frame % 3) * 1024;
-        let clipy = (frame > 3) ? 926 : 0;
+        let clipx = FRAME_POSITIONS[frame].x - 614;
+        let clipy = FRAME_POSITIONS[frame].y - 294;
 
         this.y = this.calculateY(time);
         this.ctx.drawImage(this.bitmap,clipx, clipy, 1024, 926, this.x, this.y, 128, 112);
