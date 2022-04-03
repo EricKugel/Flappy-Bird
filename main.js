@@ -3,6 +3,7 @@ var ctx;
 var cache;
 var time = 0;
 var score = 0;
+var speed = 36;
 
 const resources = ["sky.jpg", "bird.png"];
 
@@ -52,7 +53,7 @@ function loadImages() {
 
 var gameOver = false;
 function gameLoop() {
-    time += 36;
+    time += speed;
     
     ctx.drawImage(cache.sky, 0, 0, window.innerWidth, window.innerHeight);
     bird.draw(time);
@@ -68,6 +69,7 @@ function gameLoop() {
             pipes.splice(i, 1);
             pipes.push(new Pipe());
             score += 1;
+            speed += 1;
             i--;
         }
         pipe.update();
@@ -84,9 +86,7 @@ function gameLoop() {
     if (!gameOver) {
         window.setTimeout(function() {
             gameLoop();
-        }, 1000 / 36);
-    } else {
-
+        }, 1000 / speed);
     }
 }
 
