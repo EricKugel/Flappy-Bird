@@ -2,21 +2,32 @@
 <head>
 </head>
 <body>
-    <canvas id="myCanvas">
+    <canvas id="myCanvas" width = 640 height = 480>
     </canvas>
     <script src="bird.js"></script>
     <script>
         let canvas = document.getElementById("myCanvas");
+        let ctx = canvas.getContext("2d");
 
         let image = new Image();
 
         image.onload = function() {
             createImageBitmap(image)
                 .then(function(bitmap) {
-                    const bird = new Bird(bitmap, 50, 50, canvas);
+                    const bird = new Bird(bitmap, 50, 200, ctx);
                     bird.draw(0);
 
+                    let second = -1;
                     function repeatOften(time) {
+                        if (second === -1) {
+                            second = Math.floor(time / 1000);
+                        } else {
+                            if (Math.floor(time / 1000) > second) {
+                                second = Math.floor(time / 1000);
+                                bird.flap(time);
+                            }
+                        }
+
                         bird.draw(time);
                         requestAnimationFrame(repeatOften);
                     }
@@ -24,7 +35,7 @@
                 })
         };
 
-        image.src = 'bird.jpg';
+        image.src = 'lib/bird.jpg';
     </script>
 </body>
 </html>
