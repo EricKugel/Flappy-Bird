@@ -69,6 +69,10 @@ class Bird {
 
     calculateY(time) {
         const elapsed = time - this.bounceTime;
-        return this.bounceY - (elapsed / 1000) * 300 * this.gravityStrength + Math.pow((elapsed / 1000), 2) * 300 * this.gravityStrength;
+        var newY = this.bounceY - (elapsed / 1000) * 300 * this.gravityStrength + Math.pow((elapsed / 1000), 2) * 300 * this.gravityStrength;
+        if (newY < 0) {
+            newY = 0;
+        }
+        return newY;
     }
 }
