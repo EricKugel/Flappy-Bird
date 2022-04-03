@@ -1,0 +1,30 @@
+<html>
+<head>
+</head>
+<body>
+    <canvas id="myCanvas">
+    </canvas>
+    <script src="bird.js"></script>
+    <script>
+        let canvas = document.getElementById("myCanvas");
+
+        let image = new Image();
+
+        image.onload = function() {
+            createImageBitmap(image)
+                .then(function(bitmap) {
+                    const bird = new Bird(bitmap, 50, 50, canvas);
+                    bird.draw(0);
+
+                    function repeatOften(time) {
+                        bird.draw(time);
+                        requestAnimationFrame(repeatOften);
+                    }
+                    requestAnimationFrame(repeatOften);
+                })
+        };
+
+        image.src = 'bird.jpg';
+    </script>
+</body>
+</html>
