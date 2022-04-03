@@ -53,6 +53,17 @@ function loadImages() {
 var gameOver = false;
 function gameLoop() {
     time += 36;
+    
+    ctx.drawImage(cache.sky, 0, 0, window.innerWidth, window.innerHeight);
+    bird.draw(time);
+    var birdRect = bird.getRect();
+
+    if (birdRect[1] > window.innerHeight) {
+        endGame();
+    } else if (birdRect[1] < 0) {
+        bird.y = 0;
+    }
+
     for (var i = 0; i < pipes.length; i++) {
         var pipe = pipes[i];
         if (pipe.x + pipe.width < 0) {
@@ -62,15 +73,20 @@ function gameLoop() {
             i--;
         }
         pipe.update();
+        if (pipe.isOverlapping(birdRect[0], birdRect[1], birdRect[2], birdRect[3])) {
+            endGame();
+        }
     }
-
-    ctx.drawImage(cache.sky, 0, 0, window.innerWidth, window.innerHeight);
-    bird.draw(time);
     for (var i = 0; i < pipes.length; i++) {
         pipes[i].draw(ctx);
     }
     ctx.fillStyle = "black";
     ctx.fillText(score, window.innerWidth - 100, 100);
+
+    ctx.beginPath();
+    ctx.rect(birdRect[0], birdRect[1], birdRect[2] - birdRect[0], birdRect[3] - birdRect[1]);
+    ctx.strokeStyle = "red";
+    ctx.stroke();
 
     if (!gameOver) {
         window.setTimeout(function() {

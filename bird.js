@@ -60,7 +60,11 @@ class Bird {
         let clipy = FRAME_POSITIONS[frame].y - 294;
 
         this.y = this.calculateY(time);
-        this.ctx.drawImage(this.bitmap,clipx, clipy, 1024, 926, this.x, this.y, 128, 112);
+        this.ctx.drawImage(this.bitmap, clipx, clipy, 1024, 926, this.x, this.y, 128, 112);
+    }
+
+    getRect() {
+        return [this.x, this.y, this.x + 112, this.y + 70];
     }
 
     calculateY(time) {
