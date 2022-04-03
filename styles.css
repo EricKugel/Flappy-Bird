@@ -1,6 +1,7 @@
 body {
     background-color: #999999;
     margin: 0;
+    overflow: hidden;
 }
 
 canvas {
@@ -8,4 +9,54 @@ canvas {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+#author {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+
+@keyframes in {
+    from {
+        left: 50%;
+        bottom: -100%;
+    } to {
+        left: 50%;
+        bottom: 50%;
+        transform: translate(-50%, 50%);
+    }
+}
+
+#popup {
+    padding: 30px;
+    background-color: rgb(236, 236, 236);
+    font-family: sans-serif;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    bottom: -100%;
+    transform: translate(-50%, -0);
+}
+
+.show {
+    animation-name: in;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+#scoreText {
+    font-size: 72px;
+}
+
+#score {
+    margin: 50px;
+    font-size: 240px;
+}
+
+#playagain {
+    width: 200px;
+    height: 100px;
+    background-color: gray;
+    font-size: 32px;
 }

@@ -10,6 +10,7 @@ var pipes;
 var bird;
 
 window.onload = function() {
+    window.scroll(0, 0);
     canvas = document.getElementById("canvas");
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -19,11 +20,13 @@ window.onload = function() {
 
     window.addEventListener('keydown', function() {
         bird.flap(time);
+    }); window.addEventListener('mousedown', function() {
+        bird.flap(time);
+    }); window.addEventListener("touchstart", function() {
+        bird.flap(time);
     });
 
-    window.addEventListener('mousedown', function() {
-        bird.flap(time);
-    })
+    document.getElementById("playagain").onclick = playAgain;
 
     loadImages();
 }
@@ -47,6 +50,7 @@ function loadImages() {
     }, function() {});
 }
 
+var gameOver = false;
 function gameLoop() {
     time += 36;
     for (var i = 0; i < pipes.length; i++) {
@@ -68,7 +72,21 @@ function gameLoop() {
     ctx.fillStyle = "black";
     ctx.fillText(score, window.innerWidth - 100, 100);
 
-    window.setTimeout(function() {
-        gameLoop();
-    }, 1000 / 36);
+    if (!gameOver) {
+        window.setTimeout(function() {
+            gameLoop();
+        }, 1000 / 36);
+    } else {
+
+    }
+}
+
+function endGame() {
+    document.getElementById("score").innerText = score;
+    document.getElementById("popup").className = "show";
+    gameOver = true;
+}
+
+function playAgain() {
+    location.reload();
 }
