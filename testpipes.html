@@ -1,0 +1,34 @@
+<html>
+<head>
+</head>
+<body>
+    <script src="pipes.js"></script>
+    <script>
+        function test1() {
+            // Given
+            const pipe = new Pipe(100);
+            const x1 = 100;
+            const y1 = 100;
+            const x2 = 200;
+            const y2 = 200;
+            const otherx1 = 150;
+            const othery1 = 150;
+            const otherx2 = 300;
+            const othery2 = 300;
+
+            // When
+            const overlap = pipe.rectanglesOverlap(x1, y1, x2, y2, otherx1, othery1, otherx2, othery2);
+
+            // Then (true = pass)
+            return overlap;
+        }
+
+        if (test1()) {
+            console.log('PASS');
+        } else {
+            console.log('FAIL');
+        }
+
+    </script>
+</body>
+</html>

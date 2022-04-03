@@ -36,22 +36,16 @@ class Bird {
         this.ctx = ctx;
 
         this.flapsPerSecond = 3;
-        this.gravityStrength = 2;
+        this.gravityStrength = 1;
 
-        this.bounceY = y;
-        this.bounceTime = -1;
+        this.dy = -20;
     }
 
     flap(time) {
-        this.bounceY = this.calculateY(time);
-        this.bounceTime = time;
+        this.dy = -20;
     }
 
     draw(time) {
-        if (this.bounceTime === -1) {
-            this.bounceTime = time;
-        }
-
         // Determine which animation frame
         const frame = Math.floor(((time * this.flapsPerSecond) % 1000) / 167);
 
@@ -59,7 +53,7 @@ class Bird {
         let clipx = FRAME_POSITIONS[frame].x - 614;
         let clipy = FRAME_POSITIONS[frame].y - 294;
 
-        this.y = this.calculateY(time);
+        this.updateY(time);
         this.ctx.drawImage(this.bitmap, clipx, clipy, 1024, 926, this.x, this.y, 128, 112);
     }
 
@@ -67,12 +61,12 @@ class Bird {
         return [this.x, this.y, this.x + 112, this.y + 70];
     }
 
-    calculateY(time) {
-        const elapsed = time - this.bounceTime;
-        var newY = this.bounceY - (elapsed / 1000) * 300 * this.gravityStrength + Math.pow((elapsed / 1000), 2) * 300 * this.gravityStrength;
-        if (newY < 0) {
-            newY = 0;
+    updateY(time) {
+        this.y = this.y + this.dy;
+        this.dy = this.dy + this.gravityStrength;
+        if (this.y < 0) {
+            this.y = 0;
+            this.dy = 0;
         }
-        return newY;
     }
 }
