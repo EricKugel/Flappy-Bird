@@ -39,10 +39,40 @@ canvas {
     transform: translate(-50%, -0);
 }
 
+#intro {
+    padding: 30px;
+    background-color: rgb(236, 236, 236);
+    font-family: sans-serif;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    bottom: -100%;
+}
+
+#introTitle {
+    font-size: 72px;
+}
+
+#introInstr {
+    margin: 50px;
+    font-size: 48px;
+}
+
+#introBegin {
+    width: 200px;
+    height: 100px;
+    background-color: gray;
+    font-size: 32px;
+}
+
 .show {
     animation-name: in;
     animation-duration: 1s;
     animation-fill-mode: forwards;
+}
+
+.hide {
+    display:none;
 }
 
 #scoreText {

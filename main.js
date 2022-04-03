@@ -9,6 +9,8 @@ const resources = ["sky.jpg", "bird.png"];
 var pipes;
 var bird;
 
+var firstFrame = true;
+
 window.onload = function() {
     window.scroll(0, 0);
     canvas = document.getElementById("canvas");
@@ -27,6 +29,7 @@ window.onload = function() {
     });
 
     document.getElementById("playagain").onclick = playAgain;
+    document.getElementById("introBegin").onclick = beginGame;
 
     loadImages();
 }
@@ -45,6 +48,7 @@ function loadImages() {
         cache = ImageManager.cache;
         createImageBitmap(cache.bird).then(function(bitmap) {
             bird = new Bird(bitmap, 100, window.innerHeight / 2, ctx);
+
             gameLoop();
         });
     }, function() {});
@@ -53,7 +57,7 @@ function loadImages() {
 var gameOver = false;
 function gameLoop() {
     time += 36;
-    
+
     ctx.drawImage(cache.sky, 0, 0, window.innerWidth, window.innerHeight);
     bird.draw(time);
     var birdRect = bird.getRect();
@@ -88,6 +92,13 @@ function gameLoop() {
     ctx.strokeStyle = "red";
     ctx.stroke();
 
+    // If first frame, display Intro window
+    if (firstFrame) {
+        introScreen();
+        firstFrame = false;
+        return;
+    }
+
     if (!gameOver) {
         window.setTimeout(function() {
             gameLoop();
@@ -101,6 +112,15 @@ function endGame() {
     document.getElementById("score").innerText = score;
     document.getElementById("popup").className = "show";
     gameOver = true;
+}
+
+function introScreen() {
+    document.getElementById("intro").className = "show";
+}
+
+function beginGame() {
+    document.getElementById("intro").className = "hide";
+    gameLoop();
 }
 
 function playAgain() {
