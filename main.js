@@ -2,6 +2,7 @@ var canvas;
 var ctx;
 var cache;
 var time = 0;
+var score = 0;
 
 const resources = ["sky.jpg", "bird.png"];
 
@@ -13,6 +14,7 @@ window.onload = function() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     ctx = canvas.getContext("2d");
+    ctx.font = "72px arial";
     pipes = [new Pipe(window.innerWidth / 2), new Pipe()];
 
     window.addEventListener('keydown', function() {
@@ -52,6 +54,7 @@ function gameLoop() {
         if (pipe.x + pipe.width < 0) {
             pipes.splice(i, 1);
             pipes.push(new Pipe());
+            score += 1;
             i--;
         }
         pipe.update();
@@ -62,6 +65,8 @@ function gameLoop() {
     for (var i = 0; i < pipes.length; i++) {
         pipes[i].draw(ctx);
     }
+    ctx.fillStyle = "black";
+    ctx.fillText(score, window.innerWidth - 100, 100);
 
     window.setTimeout(function() {
         gameLoop();
