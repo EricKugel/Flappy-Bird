@@ -34,8 +34,10 @@ function loadImages() {
 
     ImageManager.load(images, function() {
         cache = ImageManager.cache;
-        bird = new Bird(createImageBitmap(cache.bird), 100, window.innerHeight / 2, ctx);
-        gameLoop();
+        createImageBitmap(cache.bird).then(function(bitmap) {
+            bird = new Bird(bitmap, 100, window.innerHeight / 2, ctx);
+            gameLoop();
+        });
     }, function() {});
 }
 
@@ -52,7 +54,7 @@ function gameLoop() {
     }
 
     ctx.drawImage(cache.sky, 0, 0, window.innerWidth, window.innerHeight);
-    // draw bird
+    bird.draw(time);
     for (var i = 0; i < pipes.length; i++) {
         pipes[i].draw(ctx);
     }
