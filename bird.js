@@ -10,7 +10,7 @@ class Bird {
         this.flapsPerSecond = 3;
         this.gravityStrength = 2;
 
-        this.bounceY = x;
+        this.bounceY = y;
         this.bounceTime = -1;
     }
 
@@ -33,7 +33,6 @@ class Bird {
 
         this.y = this.calculateY(time);
         this.ctx.drawImage(this.bitmap,clipx, clipy, 1024, 926, this.x, this.y, 128, 112);
-
     }
 
     calculateY(time) {
