@@ -3,7 +3,7 @@ var ctx;
 var cache;
 var time = 0;
 
-const resources = ["sky.jpg", "bird.jpg"];
+const resources = ["sky.jpg", "bird.png"];
 
 var pipes;
 var bird;
@@ -16,8 +16,12 @@ window.onload = function() {
     pipes = [new Pipe(window.innerWidth / 2), new Pipe()];
 
     window.addEventListener('keydown', function() {
-        
+        bird.flap(time);
     });
+
+    window.addEventListener('mousedown', function() {
+        bird.flap(time);
+    })
 
     loadImages();
 }
