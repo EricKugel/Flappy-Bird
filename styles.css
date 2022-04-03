@@ -2,3 +2,10 @@ body {
     background-color: #999999;
     margin: 0;
 }
+
+canvas {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
