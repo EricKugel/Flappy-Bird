@@ -1,10 +1,12 @@
 var canvas;
 var ctx;
 var cache;
+var time = 0;
 
-const resources = ["sky.jpg"];
+const resources = ["sky.jpg", "bird.jpg"];
 
 var pipes;
+var bird;
 
 window.onload = function() {
     canvas = document.getElementById("canvas");
@@ -32,11 +34,13 @@ function loadImages() {
 
     ImageManager.load(images, function() {
         cache = ImageManager.cache;
+        bird = new Bird(createImageBitmap(cache.bird), 100, window.innerHeight / 2, ctx);
         gameLoop();
     }, function() {});
 }
 
 function gameLoop() {
+    time += 36;
     for (var i = 0; i < pipes.length; i++) {
         var pipe = pipes[i];
         if (pipe.x + pipe.width < 0) {
