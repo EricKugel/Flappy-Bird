@@ -1,11 +1,11 @@
 // A simple Bird class
 
 class Bird {
-    constructor(bitmap, x, y, canvas) {
+    constructor(bitmap, x, y, ctx) {
         this.bitmap = bitmap;
         this.x = x;
         this.y = y;
-        this.canvas = canvas;
+        this.ctx = ctx;
 
         this.flapsPerSecond = 3;
     }
@@ -18,7 +18,6 @@ class Bird {
         let clipx = (frame % 3) * 1024;
         let clipy = (frame > 3) ? 926 : 0;
 
-        let ctx = this.canvas.getContext("2d");
-        ctx.drawImage(this.bitmap,clipx, clipy, 1024, 926, this.x, this.y, 128, 112);
+        this.ctx.drawImage(this.bitmap,clipx, clipy, 1024, 926, this.x, this.y, 128, 112);
     }
 }

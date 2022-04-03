@@ -12,6 +12,11 @@ window.onload = function() {
     canvas.height = window.innerHeight;
     ctx = canvas.getContext("2d");
     pipes = [new Pipe(window.innerWidth / 2), new Pipe()];
+
+    window.addEventListener('keydown', function() {
+        
+    });
+
     loadImages();
 }
 
