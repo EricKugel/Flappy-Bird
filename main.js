@@ -60,8 +60,6 @@ function gameLoop() {
 
     if (birdRect[1] > window.innerHeight) {
         endGame();
-    } else if (birdRect[1] < 0) {
-        bird.y = 0;
     }
 
     for (var i = 0; i < pipes.length; i++) {
@@ -82,11 +80,6 @@ function gameLoop() {
     }
     ctx.fillStyle = "black";
     ctx.fillText(score, window.innerWidth - 100, 100);
-
-    ctx.beginPath();
-    ctx.rect(birdRect[0], birdRect[1], birdRect[2] - birdRect[0], birdRect[3] - birdRect[1]);
-    ctx.strokeStyle = "red";
-    ctx.stroke();
 
     if (!gameOver) {
         window.setTimeout(function() {
